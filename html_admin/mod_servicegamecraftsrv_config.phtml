@@ -1,0 +1,36 @@
+ <div class="help">
+    <h5>{% trans 'Server settings' %}</h5>
+</div>
+
+<form method="post" action="{{ 'api/admin/product/update_config'|link }}" class="mainForm api-form save" data-api-msg="Hosting settings updated">
+<fieldset>
+    <div class="rowElem">
+        <label>{% trans 'Server' %}:</label>
+        <div class="formRight noborder">
+            <select multiple name="{{ name }}" {% if required %}required="required"{% endif%}>
+                {% for server in admin.craftsrv_get_servers %}
+                    <option value="{{ val }}" label="{{ label|e }}" {% if val in selected %}selected="selected"{% endif %}>{{ server|e }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="fix"></div>
+    </div>
+    <div class="rowElem">
+        <label>{% trans 'Games' %}:</label>
+        <div class="formRight noborder">
+            {{ mf.selectbox('config[game_id]', admin.craftsrv_get_games, product.config.game_id, 0, 'Select games') }}
+        </div>
+        <div class="fix"></div>
+    </div>
+    <div class="rowElem">
+        <label>{% trans 'Hosting plan' %}:</label>
+        <div class="formRight noborder">
+            {{ mf.selectbox('config[plan_id]', admin.craftsrv_get_plans, product.config.plan_id, 0, 'Select hosting plan') }}
+        </div>
+        <div class="fix"></div>
+    </div>
+    <input type="submit" value="{% trans 'Update' %}" class="greyishBtn submitForm" />
+</fieldset>
+        
+<input type="hidden" name="id" value="{{ product.id }}" />
+</form>
