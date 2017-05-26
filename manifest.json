@@ -1,0 +1,10 @@
+{
+    "id"			: "servicegamecraftsrv",
+	"type"			: "mod",
+    "name"			: "Server CraftSRV product type",
+    "description"	: "Implement server CraftSRV product type",
+    "version"		: "0.1.0",
+    "author"		: "eqima team",
+    "author_url"	: "http://eqima.org",
+    "project_url"	: "http://byeqima.org/boxbilling"
+}
