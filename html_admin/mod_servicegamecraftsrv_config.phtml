@@ -7,9 +7,9 @@
     <div class="rowElem">
         <label>{% trans 'Server' %}:</label>
         <div class="formRight noborder">
-            <select multiple name="config[server_id][]" {% if required %}required="required"{% endif%}>
-                {% for val,server in admin.craftsrv_get_servers %}
-                    <option value="{{ val }}" label="{{ label|e }}" {% if val in product.config.server_id %}selected="selected"{% endif %}>{{ server|e }}</option>
+            <select multiple name="config[craftsrv_id][]" {% if required %}required="required"{% endif%}>
+                {% for craftsrv in admin.craftsrv_get_list.list %}
+                    <option value="{{ craftsrv.id }}" label="{{ label|e }}" {% if val in product.config.craftsrv_id %}selected="selected"{% endif %}>{{ craftsrv.name|e }}</option>
                 {% endfor %}
             </select>
         </div>
