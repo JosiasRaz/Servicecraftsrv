@@ -51,20 +51,33 @@ class Service implements \Box\InjectionAwareInterface
         $this->di['db']->exec("DROP TABLE IF EXISTS `servicegamecraftsrv`");
     }
 
-  //   public function create($order)
-  //   {
-  // //   	$product = $this->di['db']->load('product', $order->product_id) ;
-  //       $config = json_decode($order->config, 1);
-  //   	// $config = json_decode($product->config,true) ;
-  // //   	foreach ($config['craftsrv_id'] as $craftsrv_id) {
-  // //   		$api_admin = $this->di['api_admin'] ;
-  // //   		$craftsrv = array_shift($api_admin->craftsrv_get_list(array('search'=>$craftsrv_id))['list']) ;
-  // //   	}
-  //       $model->name = $config['name'] ;
-  //       return $model ;
-  // //       var_dump($craftsrv) ; die() ;
-		// // var_dump($config) ;die() ;
-  //   }
+
+    public function create($order)
+    {
+        $product = $this->di['db']->load('product', $order->product_id) ;
+        $product_config = json_decode($product->config) ;
+        $config = json_decode($order->config);
+        var_dump($config) ; var_dump($product_config) ; die() ;
+        $model = $this->di['db']->dispense('servicegamecraftsrv') ;
+        $model->name = $config->name ;
+        $model->game = $product_config->game ;
+        $model->plan = $product_config->plan_id ;
+        // if (isset($config['suspended']))
+            $model->suspended = true ;
+        // else
+            // $model->suspended = false ;
+        $model->user = $order->client_id ;
+
+        $api_admin = $this->di['api_admin'] ;
+        foreach ($product_config->craftsrv_id as $craftsrv_id) {
+            $craftsrv = array_shift($api_admin->craftsrv_get_list(array('search'=>$craftsrv_id))['list']) ;
+        }
+        var_dump($model) ; var_dump($api_admin->get_setting($craftsrv)->serverDefaultNetworkAddress) ; die() ;
+        $model->ip   = $config['ip'] ;
+        $model->port = $config['port'] ;
+        $this->di['db']->store($model);
+        return $model ;
+    }
 
   //   public function activate($order, $server)
   //   {

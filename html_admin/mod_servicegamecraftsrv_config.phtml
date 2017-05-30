@@ -18,7 +18,7 @@
     <div class="rowElem">
         <label>{% trans 'Games' %}:</label>
         <div class="formRight noborder">
-            {{ mf.selectbox('config[game_id]', admin.craftsrv_get_games, product.config.game_id, 0, 'Select games') }}
+            {{ mf.selectbox('config[game]', admin.craftsrv_get_games, product.config.game, 0, 'Select games') }}
         </div>
         <div class="fix"></div>
     </div>
