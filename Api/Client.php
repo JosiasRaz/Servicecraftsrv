@@ -15,7 +15,7 @@ class Client extends \Api_Abstract
 	public function sign_up($data)
 	{
 		$error = false ;
-		$craftsvr_user_id = $this->di['api_admin']->craftsrv_createUser($data) ;
+		$craftsvr_user_id = $this->di['api_admin']->craftsrv_createUser($data)->id ;
 		$user = $this->get_user() ;
 		$user->craftsrv_user_id  = $craftsvr_user_id ;
         $this->di['db']->store($user) ;

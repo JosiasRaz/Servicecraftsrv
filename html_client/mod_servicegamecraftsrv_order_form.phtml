@@ -1,9 +1,15 @@
 {% set srvUser=client.servicegamecraftsrv_get_user %}
 {% if srvUser.craftsrv_user_id %}
-	test ok
+	<div class="tab-content">
+		<label for="name">Server name</label>
+		<div class="control-group">
+			<input type="text" name="name" />
+			<input type="hidden" name="craftsrv_user_id" value="{{srvUser.craftsrv_user_id}}" />
+		</div>
+	</div>
 {% else %}
 	{% block content %}
-	<a href="{{ 'servicegamecraftsrv/sign_up'|link({'order':product.id,'craftsrv_ids':product.config.craftsrv_id}) }}">Register as a CraftSRV user</a></br>
+	<a href="{{ 'servicegamecraftsrv/sign_up'|link({'order':product.id,'craftsrv_id':product.config.craftsrv_id}) }}">Register as a CraftSRV user</a></br>
 	<style type="text/css">
 		button[type="submit"] {
 			display: none;
