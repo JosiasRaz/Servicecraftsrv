@@ -40,7 +40,12 @@ class Service implements \Box\InjectionAwareInterface
                 PRIMARY KEY (`id`),
                 UNIQUE(`name`)
                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-            )
+            ) ;
+        " ;
+        $this->di['db']->exec($sql);
+
+        $sql = "
+            ALTER TABLE `client` ADD `craftsrv_user_id` INT(5) DEFAULT NULL  ;
         " ;
 
         $this->di['db']->exec($sql);
@@ -48,9 +53,9 @@ class Service implements \Box\InjectionAwareInterface
 
     public function uninstall()
     {
-        $this->di['db']->exec("DROP TABLE IF EXISTS `servicegamecraftsrv`");
+        $this->di['db']->exec("DROP TABLE IF EXISTS `servicegamecraftsrv`") ;
+        $this->di['db']->exec("ALTER TABLE `client` DROP `craftsrv_user_id`") ;
     }
-
 
     public function create($order)
     {
