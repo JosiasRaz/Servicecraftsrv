@@ -1,0 +1,14 @@
+{% set srvUser=client.servicegamecraftsrv_get_user %}
+{% if srvUser.craftsrv_user_id %}
+	test ok
+{% else %}
+	{% block content %}
+	<a href="{{ 'servicegamecraftsrv/sign_up'|link({'order':product.id,'craftsrv_ids':product.config.craftsrv_id}) }}">Register as a CraftSRV user</a></br>
+	<style type="text/css">
+		button[type="submit"] {
+			display: none;
+		}
+	</style>
+	{% endblock %}
+{% endif %}
+

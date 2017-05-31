@@ -1,0 +1,56 @@
+{% extends "layout_default.phtml" %}
+{% import "macro_functions.phtml" as mf %}
+{% block header %}
+{% endblock %}
+{% block body %}
+{% set srvUser=client.servicegamecraftsrv_get_user %}
+	<div class="tab-content" style="margin-top: 50px; ">
+		<div class="tab-pane active" id="register">
+			<form action="{{ 'api/client/servicegamecraftsrv/sign_up'|link }}" method="POST" data-api-redirect="{{ 'orderbutton'|link({'order':request.order}) }}" class="mainForm api-form">
+				<fieldset>
+					<h3 class="alert alert-info">{% trans 'Register as a CraftSRV user here' %}</h3>
+					<div class="control-group">
+						<label for="username">{%trans 'Username' %}</label>
+						<div class="form-horizontal">
+							<input type="text" name="username" value="{{ srvUser.first_name }}" required="required"/>
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="password">{%trans 'Password' %}</label>
+						<div class="form-horizontal">
+							<input type="password" name="password" required="required" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="repassword">{%trans 'Rewrite password' %}</label>
+						<div class="form-horizontal">
+							<input type="password" name="repassword" required="required" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="fullName">{%trans 'Full Name' %}</label>
+						<div class="form-horizontal">
+							<input type="text" name="fullName" value="{{ srvUser.first_name }} {{ srvUser.last_name }}" required="required" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="minecraftUsername">{%trans 'Minecraft UserName' %}</label>
+						<div class="form-horizontal">
+							<input type="text" name="minecraftUsername" value="" />
+						</div>
+					</div>
+					<div class="control-group">
+						<label for="email">{%trans 'Email' %}</label>
+						<div class="form-horizontal">
+							<input type="text" name="email" value="{{ srvUser.email }}" />
+						</div>
+					</div>
+					<div class="control-group">
+						<input type="hidden" name="server_ids" value="{{ request.craftsrv_ids|json_encode }}" />
+						<button class="btn btn-inverse" type="submit" id="sign-up">{% trans 'Sign up' %}</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+{% endblock %}
