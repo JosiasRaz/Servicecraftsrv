@@ -14,6 +14,9 @@ class Client extends \Api_Abstract
 
 	public function sign_up($data)
 	{
+        if ($data['password'] != $data['repassword']) {
+        	throw new \Box_Exception('Passwords doesn\'t match', null, 701);
+        }
 		$error = false ;
 		$craftsvr_user_id = $this->di['api_admin']->craftsrv_createUser($data)->id ;
 		$user = $this->get_user() ;
