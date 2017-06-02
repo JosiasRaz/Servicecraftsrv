@@ -1,0 +1,1 @@
+Search.setIndex({docnames:["README"],envversion:53,filenames:["README.rst"],objects:{},objnames:{},objtypes:{},terms:{index:0,modul:0,pag:0,recherch:0},titles:["Welcome to Service C\u2019s documentation!"],titleterms:{and:0,document:0,indic:0,servic:0,tabl:0,welcom:0}})
